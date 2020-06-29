@@ -12,7 +12,7 @@ plt.rc('text', usetex=True)
 
 a_values = [0]
 b_values = [1, 2, 4]
-alpha_values = [1, 2, 4]
+alpha_values = [1, 2, 3]
 color = [['brown','indianred','lightcoral'],
          ['darkorange','orange','gold'],
          ['darkslategrey','teal','cadetblue']]
@@ -20,10 +20,15 @@ color = [['brown','indianred','lightcoral'],
 n_max = 6
 
 fig, ax = plt.subplots(3, 3, sharey='row', sharex='col', figsize=(10,6))
+fig_l, ax_l = plt.subplots(3, 3, sharey='row', sharex='col', figsize=(10,6))
 
 fig.suptitle(r"Erro relativo do estimador de $g(\alpha, a, b)$")
 fig.text(0.04, 0.5, r"$\frac{|\hat{g}_n - g(\alpha, a, b)|}{g(\alpha, a, b)}$", va='center', rotation='vertical')
 fig.text(0.5, 0.04, "Número de amostras n", ha='center')
+
+fig_l.suptitle(r"Erro relativo do estimador de $g(\alpha, a, b)$")
+fig_l.text(0.04, 0.5, r"$\frac{|\hat{g}_n - g(\alpha, a, b)|}{g(\alpha, a, b)}$", va='center', rotation='vertical')
+fig_l.text(0.5, 0.04, "Número de amostras n", ha='center')
 
 a_idx = 0
 for alpha in alpha_values:
@@ -55,6 +60,7 @@ for alpha in alpha_values:
                 g_error += [ abs(g_til - g)/g ]
 
             ax[a_idx][b_idx].semilogx(n_values, g_error, color=color[a_idx][b_idx])
+            ax_l[a_idx][b_idx].loglog(n_values, g_error, color=color[a_idx][b_idx])
 
             info = r"\begin{eqnarray*}" + \
                    r"&\alpha& = {} \\ " \
@@ -62,10 +68,16 @@ for alpha in alpha_values:
                    r"&b& = {}".format(alpha,a,b) + \
                    r"\end{eqnarray*}"
             ax[a_idx][b_idx].text(.7,.5, info, transform=ax[a_idx][b_idx].transAxes)
-            ax[a_idx][b_idx].grid(which="both")
+            ax[a_idx][b_idx].grid(which="major")
+
+            ax_l[a_idx][b_idx].text(.7, .53, info, transform=ax_l[a_idx][b_idx].transAxes)
+            ax_l[a_idx][b_idx].grid(which="major")
 
             b_idx += 1
     a_idx += 1
 
-plt.savefig("Imagens/q6_integracaoMC")
+plt.figure(fig.number)
+plt.savefig("Imagens/q6_integracaoMC.pdf")
+plt.figure(fig_l.number)
+plt.savefig("Imagens/q6_integracaoMC-log.pdf")
 plt.show()

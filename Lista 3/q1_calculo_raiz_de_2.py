@@ -44,4 +44,12 @@ plt.title(r"Erro relativo do estimador de $\sqrt{2}$")
 plt.ylabel(r"$\frac{|\hat{e}_n - \sqrt{2}|}{\sqrt{2}}$")
 plt.xlabel("Número de amostras n")
 
+fig = plt.figure()
+plt.plot(n_values, estimate)
+plt.xscale('log')
+plt.yscale('log')
+plt.title(r"Erro relativo do estimador de $\sqrt{2}$")
+plt.ylabel(r"$\frac{|\hat{e}_n - \sqrt{2}|}{\sqrt{2}}$")
+plt.xlabel("Número de amostras n")
+
 plt.show()

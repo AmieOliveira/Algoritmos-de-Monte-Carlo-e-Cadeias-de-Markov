@@ -57,4 +57,12 @@ plt.title(r"Erro relativo do estimador de $G_N$")
 plt.ylabel(r"$\frac{|M_n - G_N|}{G_N}$")
 plt.xlabel("Número de amostras n")
 
+fig = plt.figure()
+plt.plot(n_values, erros)
+plt.xscale('log')
+plt.yscale('log')
+plt.title(r"Erro relativo do estimador de $G_N$")
+plt.ylabel(r"$\frac{|M_n - G_N|}{G_N}$")
+plt.xlabel("Número de amostras n")
+
 plt.show()
